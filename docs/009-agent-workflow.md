@@ -51,10 +51,12 @@ ASSIGN --> DEV[Backend / Frontend / DevOps]
 DEV --> TEST[Tester]
 TEST --> REVIEWER[Reviewer]
 
-REVIEWER -->|Approved| EM
+REVIEWER -->|Approved| ACCEPTED[Accepted]
 REVIEWER -->|Rework| DEV
 
-EM -->|Closed| PO
+ACCEPTED --> EM
+EM -->|Ready for Closure| PO
+PO -->|Closed| EM
 ```
 
 ---
@@ -184,17 +186,17 @@ No Bolt may proceed without:
 
 # 4.7 Closure Phase
 
-## Owner: Engineering Manager
+## Owner: Product Owner, coordinated by Engineering Manager
 
 ### Steps:
 
 1. EM validates:
    - Tester passed
    - Reviewer approved
-2. EM marks Bolt as CLOSED
-3. Metrics are recorded
-4. Logs are finalized
-5. PO is notified
+2. EM presents the Accepted Bolt to the Product Owner
+3. Product Owner accepts or rejects final closure
+4. If accepted, Product Owner marks Bolt as CLOSED
+5. EM records metrics and finalizes logs
 
 ---
 
@@ -242,6 +244,7 @@ Accepted --> Closed
 - Assigns work
 - Tracks progress
 - Ensures consistency
+- Coordinates Product Owner closure
 
 ---
 

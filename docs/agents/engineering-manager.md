@@ -153,7 +153,8 @@ EM --> PO
 
 ## 6.5 Closure Phase
 
-- Mark Bolts as Closed after PO approval
+- Present Accepted Bolts to the Product Owner for closure
+- Record closure only after Product Owner acceptance
 - Archive metrics and learnings
 - Update project health dashboard
 
@@ -212,6 +213,7 @@ The EM has authority over:
 - Execution scheduling
 - Blocked state resolution
 - Reassignment of agents if needed
+- Closure readiness coordination
 
 The EM does NOT control:
 
@@ -219,6 +221,7 @@ The EM does NOT control:
 - Code correctness
 - Test validation
 - Final product acceptance
+- Accepted → Closed transition
 
 ---
 

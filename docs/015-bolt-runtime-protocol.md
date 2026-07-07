@@ -50,7 +50,8 @@ ASSIGN --> DEV[Implementation Agent]
 DEV --> TESTER[Tester Agent]
 TESTER --> REVIEWER[Reviewer Agent]
 
-REVIEWER -->|Approved| EM_CLOSE[Engineering Manager Close]
+REVIEWER -->|Approved| ACCEPTED[Accepted]
+ACCEPTED --> PO_CLOSE[Product Owner Closure]
 REVIEWER -->|Rework| DEV
 ```
 
@@ -69,7 +70,8 @@ Assigned --> InProgress
 InProgress --> Testing
 Testing --> Review
 Review --> Rework
-Review --> Closed
+Review --> Accepted
+Accepted --> Closed
 ```
 
 ---
@@ -87,7 +89,7 @@ A Bolt MUST pass through:
 5. Implementation
 6. Tester
 7. Reviewer
-8. Engineering Manager closure
+8. Product Owner closure
 
 No step may be skipped.
 
@@ -143,19 +145,21 @@ A Bolt CANNOT proceed to Reviewer unless:
 
 Reviewer decision is final technical validation:
 
-- APPROVED → EM can close Bolt
+- APPROVED → Bolt transitions to Accepted
 - REWORK → returns to Implementation
 - REJECTED → escalates to EM
 
 ---
 
-## RULE R7 — EM is the Only Closure Authority
+## RULE R7 — Product Owner is the Closure Authority
 
-Only Engineering Manager can:
+Only the Product Owner can:
 
 - mark Bolt as CLOSED
-- finalize lifecycle
-- publish completion metrics
+- accept final product outcome
+- finalize lifecycle closure
+
+The Engineering Manager coordinates closure readiness and records metrics after Product Owner acceptance.
 
 ---
 
@@ -232,11 +236,12 @@ Executed by Reviewer:
 
 ## Phase 7 — Closure Runtime
 
-Executed by EM:
+Executed by Product Owner, coordinated by EM:
 
 - Confirm Tester + Reviewer approval
+- Accept final outcome
 - Close Bolt
-- Record metrics
+- Record metrics through EM
 - Finalize logs
 
 ---
