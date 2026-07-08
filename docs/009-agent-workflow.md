@@ -46,7 +46,8 @@ ARCH --> BOLT_APPROVED[Validated Bolt Spec]
 
 EM --> ASSIGN[Assign Bolt]
 
-ASSIGN --> DEV[Backend / Frontend / DevOps]
+ASSIGN --> BRANCH[Bolt Branch Ready]
+BRANCH --> DEV[Backend / Frontend / DevOps]
 
 DEV --> TEST[Tester]
 TEST --> REVIEWER[Reviewer]
@@ -56,7 +57,8 @@ REVIEWER -->|Rework Requested| EM_REWORK[EM Rework Triage]
 EM_REWORK --> DEV
 
 ACCEPTED --> EM
-EM -->|Ready for Closure| PO
+EM --> PR[Create Bolt PR]
+PR -->|Ready for Closure| PO
 PO -->|Closed| EM
 ```
 
@@ -119,7 +121,14 @@ No Bolt may proceed without:
    - Frontend
    - DevOps
 3. EM ensures dependencies are satisfied
-4. Bolt transitions to **Assigned**
+4. EM records the required Bolt Branch name
+5. Bolt transitions to **Assigned**
+
+### Branch Rule:
+
+The Bolt Branch name MUST match the Bolt name recorded in the Bolt specification. If the Bolt name is not safe for use as a git branch, the EM must resolve the Bolt name before assignment.
+
+The Bolt name is the repository-safe Bolt identifier, not necessarily the human-readable Bolt title.
 
 ---
 
@@ -129,15 +138,18 @@ No Bolt may proceed without:
 
 ### Steps:
 
-1. Assigned agent executes Bolt
-2. Implementation must follow:
+1. Assigned agent creates or checks out the Bolt Branch before changing files
+2. All code, tests, prompts, and documentation changes for the Bolt must be made only on the Bolt Branch
+3. Assigned agent executes Bolt
+4. Implementation must follow:
    - Architecture rules
    - Conventions
    - Bolt scope only
-3. Work remains within Bolt boundaries
+5. Work remains within Bolt boundaries
 
 ### Output:
 
+- Bolt Branch containing all implementation changes
 - Code changes
 - Unit/integration changes
 - Local validations
@@ -179,7 +191,7 @@ No Bolt may proceed without:
 
 ### Outcomes:
 
-- APPROVED → proceed to EM closure
+- APPROVED → proceed to Accepted, EM pull request creation, and Product Owner closure
 - REQUIRES REWORK → transition to Rework and hand off to Engineering Manager for reassignment to the appropriate implementation agent
 - REJECTED → escalated to EM
 
@@ -198,10 +210,16 @@ The Reviewer must not implement requested fixes. The Engineering Manager owns re
 1. EM validates:
    - Tester passed
    - Reviewer approved
-2. EM presents the Accepted Bolt to the Product Owner
-3. Product Owner accepts or rejects final closure
-4. If accepted, Product Owner marks Bolt as CLOSED
-5. EM records metrics and finalizes logs
+2. EM creates the pull request from the Bolt Branch
+3. PR description records:
+   - Detailed explanation of the changes made
+   - Problems found during implementation, testing, or review
+   - How each problem was reworked and fixed
+   - Validation performed
+4. EM presents the Accepted Bolt and pull request to the Product Owner
+5. Product Owner accepts or rejects final closure
+6. If accepted, Product Owner marks Bolt as CLOSED
+7. EM records metrics and finalizes logs
 
 ---
 
@@ -313,7 +331,25 @@ All state transitions must be logged.
 
 ## WF-RULE-005
 
-The Engineering Manager is the only agent allowed to close a Bolt.
+The Product Owner is the only role allowed to close a Bolt. The Engineering Manager coordinates closure readiness, creates the pull request after acceptance, and records metrics after Product Owner closure.
+
+---
+
+## WF-RULE-006
+
+Every Bolt implementation MUST occur on a Bolt Branch whose name matches the Bolt name.
+
+---
+
+## WF-RULE-007
+
+All changes for a Bolt MUST be made on its Bolt Branch until the Bolt is accepted and the Engineering Manager creates the pull request.
+
+---
+
+## WF-RULE-008
+
+When a Bolt is completed and accepted, the Engineering Manager MUST create the pull request and include detailed change, problem, rework, fix, and validation notes in the PR description.
 
 ---
 
@@ -344,10 +380,12 @@ Minimum required fields:
 
 - Timestamp (UTC)
 - Bolt ID
+- Bolt Branch
 - Previous state
 - New state
 - Agent responsible
 - Reason
+- Pull request reference, when applicable
 
 ---
 

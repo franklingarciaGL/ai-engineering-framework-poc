@@ -1,7 +1,9 @@
 # Bolt Template
 
 **Bolt ID:**  
+**Bolt Name:** (repository-safe branch name)
 **Title:**  
+**Bolt Branch:** (same as Bolt Name)
 **Status:** Draft  
 **Priority:**  
 **Type:** (Feature / Enhancement / Bug Fix / Technical Debt / Documentation / Infrastructure / Research / Refactoring)  

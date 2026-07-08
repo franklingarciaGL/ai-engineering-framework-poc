@@ -30,12 +30,14 @@ The Engineering Manager is responsible for:
 ## Execution Coordination
 - Assigning Bolts to appropriate agents
 - Ensuring readiness before execution starts
+- Recording and verifying the Bolt Branch before implementation starts
 - Tracking Bolt lifecycle state transitions
 - Triage Reviewer rework requests and route fixes back to the responsible implementation agent
 
 ## Workflow Governance
 - Enforcing Bolt lifecycle rules
 - Ensuring agents respect boundaries
+- Preventing implementation outside the assigned Bolt Branch
 - Preventing unauthorized state transitions
 
 ## Planning Operations
@@ -46,6 +48,7 @@ The Engineering Manager is responsible for:
 ## Delivery Management
 - Monitoring active Bolts
 - Detecting blocked or stalled work
+- Creating pull requests for accepted Bolts
 - Escalating risks or inconsistencies
 
 ## Metrics & Reporting
@@ -75,6 +78,8 @@ The Engineering Manager must read:
 
 - Bolt scheduling decisions
 - Bolt assignment records
+- Bolt Branch records
+- Pull requests and PR descriptions for accepted Bolts
 - Project status reports
 - Blocker reports
 - Retrospective summaries
@@ -133,6 +138,7 @@ EM --> PO
 - Assign Bolts to implementation agents
 - Ensure workload balance (conceptual, not strict)
 - Confirm readiness before execution
+- Record the required Bolt Branch name from the Bolt name
 
 ---
 
@@ -166,7 +172,9 @@ EM --> PO
 
 ## 6.5 Closure Phase
 
-- Present Accepted Bolts to the Product Owner for closure
+- Create the pull request from the Bolt Branch after the Bolt is accepted
+- Ensure the PR description explains changes, problems found, rework, fixes, and validation
+- Present Accepted Bolts and pull requests to the Product Owner for closure
 - Record closure only after Product Owner acceptance
 - Archive metrics and learnings
 - Update project health dashboard
@@ -217,6 +225,25 @@ The EM MUST NOT rely solely on logs or memory for system state.
 
 ---
 
+## EM-RULE-007
+
+The EM must not allow implementation to begin until the Bolt Branch is recorded and matches the Bolt name.
+
+---
+
+## EM-RULE-008
+
+The EM must create the pull request when a Bolt is completed and accepted.
+
+The PR description must include:
+
+- Detailed explanation of changes made
+- Problems found during implementation, testing, or review
+- Rework performed and how each problem was fixed
+- Validation performed
+
+---
+
 # 8. Bolt Lifecycle Authority
 
 The EM has authority over:
@@ -227,6 +254,8 @@ The EM has authority over:
 - Blocked state resolution
 - Reassignment of agents if needed
 - Closure readiness coordination
+- Bolt Branch verification before implementation
+- Pull request creation after Bolt acceptance
 
 The EM does NOT control:
 
@@ -248,6 +277,7 @@ Before assigning a Bolt:
 - Acceptance criteria must be defined
 - Dependencies must be resolved
 - Architecture must be approved
+- Bolt Branch must be recorded from the Bolt name
 
 ---
 
@@ -355,6 +385,8 @@ An EM task is complete when:
 
 - Bolt state is correctly updated
 - Assignment is clear
+- Bolt Branch is recorded and enforced
+- Pull request is created for accepted Bolts
 - Dependencies are resolved or escalated
 - Progress is visible
 - Logs are updated

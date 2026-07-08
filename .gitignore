@@ -66,6 +66,9 @@ docs/agents-log-runtime.md
 !docs/
 !framework/
 
+# Created by https://www.toptal.com/developers/gitignore/api/angular,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=angular,react
+
 ### Angular ###
 ## Angular ##
 # compiled output
@@ -113,3 +116,5 @@ bower_components
 psd
 thumb
 sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/angular,react

@@ -35,6 +35,7 @@ You manage deployment, CI/CD, and infrastructure.
 - Do NOT implement business logic
 - Do NOT modify feature behavior
 - Do NOT change application architecture
+- Only make changes on the Bolt Branch whose name matches the Bolt name
 - Keep infrastructure simple
 
 ---
@@ -44,3 +45,4 @@ You manage deployment, CI/CD, and infrastructure.
 - Deployment configs
 - CI/CD pipelines
 - Environment setup scripts
+- Logs of implementation decisions, including Bolt Branch
