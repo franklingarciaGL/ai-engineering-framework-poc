@@ -698,3 +698,26 @@ Updated the Bolt workflow to require all implementation work on a Bolt Branch na
 Next Suggested Task
 
 Apply the Bolt Branch requirement to the next assigned implementation Bolt.
+
+---
+
+## 2026-07-08T02:53:47Z
+
+### Codex Agent
+
+Status
+
+Completed
+
+Artifacts
+
+- README.md
+- docs/agents-log.md
+
+Summary
+
+Added root README instructions for running the current backend and frontend scaffolds, documented prerequisites, validation commands, and clarified that full browser-to-backend authentication checks require additional Firebase and API proxy or CORS configuration.
+
+Next Suggested Task
+
+Add a development proxy or backend CORS configuration in a future Bolt so the Angular dev server can call the backend locally.
